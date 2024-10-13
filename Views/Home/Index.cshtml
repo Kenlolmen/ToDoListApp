@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Zadanie>
+<div class="row">
+    <div class= "col-md-2">
+        <form asp-action="Filter" method ="post">
+            <div class="mb-3">
+                <label class ="from-label">Kategoria:</label>
+                <select name ="category" class="from-select"
+                        asp-items="@(new SelectList(ViewBag.Kategorie, "IDKategoria", "Nazwa", ViewBag.Filtry.IDKategoria))">
+                <option value="all">All</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="from-label">Okres:</label>
+                <select name="due" class="from-select"
+                        asp-items="@(new SelectList(ViewBag.DueFilters, "Key", "Value", ViewBag.Filtry.Due))">
+                    <option value="all">All</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="from-label">Status:</label>
+                <select name="status" class="from-select"
+                        asp-items="@(new SelectList(ViewBag.Statusy, "IDStatus", "Nazwa", ViewBag.Filtry.IDStatus))">
+                    <option value="all">All</option>
+                </select>
+            </div>
+            <div class="d-flex justify-content-start mb-3">
+                <button type="submit" class="btn btn-primary me-2">Filtruj</button> 
+                <a asp-action="Index" asp-route-id="" class="btn btn-secondary">Wyczyść</a>
+            </div>
+
+        </form>
+    </div>
+    <div class="col-md-10">
+
+    </div>
+</div>

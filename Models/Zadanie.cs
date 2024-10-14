@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using ToDoListApp.Models;
 
 namespace ToDoListApp.Models
@@ -7,15 +8,20 @@ namespace ToDoListApp.Models
     {
         public int Id { get; set; }
         public string Opis { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Wybierz Date")]
         public DateTime? Date { get; set; }
-        public string IDStatus { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Wybierz Status")]
+       // public string IDStatus { get; set; } = string.Empty;
+        public string StatusIDStatus { get; set; } = string.Empty;
         [ValidateNever]
         public Status Status { get; set; } = null;
-        public string IDKategoria { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Wybierz Kategorie")]   
+      //  public string IDKategoria { get; set; } = string.Empty;
+        public string KategoriaIDKategoria { get; set; } = string.Empty;
         [ValidateNever]
         public Kategoria Kategoria { get; set; } = null;
 
-        public bool CzyOpozniony => IDStatus == "open" && Date < DateTime.Today;
+        public bool CzyOpozniony => StatusIDStatus == "open" && Date < DateTime.Today;
 
     }
 }

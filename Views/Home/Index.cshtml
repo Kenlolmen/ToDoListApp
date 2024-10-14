@@ -31,6 +31,49 @@
         </form>
     </div>
     <div class="col-md-10">
+        <form asp-action="Ozn_Zrobione" method="post" asp-route-id="@ViewBag.Filtry.Filterstring">
+            <table class="table table-bordered table-striped mt-2">
+                <thead>
+                    <tr>
+                        <th>Opis </th>
+                        <th>Kategoria </th>
+                        <th>Data </th>
+                        <th>Status </th>
+                        <th class="w-25 "></th>
+                    </tr>
+                </thead>
+                @if (Model != null && Model.Any()){
+                <tbody>
+                    @foreach(Zadanie zadanie in Model)
+                    {
+                        string overdue = zadanie.CzyOpozniony ? "bg-warning" : "";
+                        <tr>
+                            <td>@zadanie.Opis</td>
+                            <td>@zadanie.Kategoria.Nazwa</td>
+                            <td class="@overdue">@zadanie.Date?.ToShortDateString()</td
+                            <td>
+                                @if (zadanie.StatusIDStatus == "open")
+                                {
+                                    <button type="submit" class="btn btn-primary btn-sm"
+                                            name="@nameof(Zadanie.Id)" value="@zadanie.Id">
+                                        Zaznacz Zrobione
+                                    </button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                }
+                else
+                {
+                    <p>Brak danych do wyświetlenia.</p>
+                }
+            </table>
 
+        </form>
+        <form asp-action="UsunZrobione" method="post" asp-route-id ="@ViewBag.Filtry.Filterstring">
+            <a asp-action="Dodaj" class="btn btn-primary">Dodaj nowe zadanie</a>
+            <button type="submit" class="btn btn-primary">Usuń zrobione zadania</button>
+        </form>
     </div>
 </div>

@@ -1,0 +1,33 @@
+﻿@model Zadanie
+
+<h2>Nowe Zadanie</h2>
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="Dodaj" method="post">
+    <div class="mb-3">
+        <label asp-for="Opis" class="form-label">Opis</label>
+        <input asp-for="Opis" class="form-cotrol"/>
+
+    </div>
+    <div class="mb-3">
+        <label asp-for="KategoriaIDKategoria" class="form-label">Kategoria</label>
+        <select asp-for="KategoriaIDKategoria" class="form-select" asp-items="@(new SelectList(ViewBag.Kategorie,"IDKategoria","Nazwa"))" required>
+            <option value="">Wybierz kategorię</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Date" class="form-label">Data</label>
+        <input asp-for="Date" class="form-control" type="text"/>
+        <option value="">(dd.mm.rrrr)</option>
+    </div>
+    <div class="mb-3">
+        <label asp-for="StatusIDStatus" class="form-label">Status</label>
+        <select asp-for="StatusIDStatus" class="form-select" asp-items="@(new SelectList(ViewBag.Statusy,"IDStatus","Nazwa"))">
+            <option value=""></option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Dodaj</button>
+    <a asp-action="Index" class="btn btn-primary">Anuluj</a>
+
+</form>

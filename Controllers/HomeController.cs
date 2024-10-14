@@ -28,12 +28,12 @@ namespace ToDoListApp.Controllers
 
             if (filtry.CzyKategoria)
             {
-                kolejka = kolejka.Where(n => n.IDKategoria == filtry.IDKategoria);
+                kolejka = kolejka.Where(n => n.KategoriaIDKategoria == filtry.IDKategoria);
             }
 
             if (filtry.CzyStatus)
             {
-                kolejka = kolejka.Where(n => n.IDStatus == filtry.IDStatus);
+                kolejka = kolejka.Where(n => n.StatusIDStatus == filtry.IDStatus);
             }
 
             if (filtry.CzyDue)
@@ -61,12 +61,30 @@ namespace ToDoListApp.Controllers
         {
             ViewBag.Kategorie = context.Kategorie.ToList();
             ViewBag.Statusy = context.Statusy.ToList();
-            var zadanie = new Zadanie { IDStatus = "otwarte" };
+            var zadanie = new Zadanie { StatusIDStatus = "otwarte" };
             return View(zadanie);
         }
         [HttpPost]
         public IActionResult Dodaj(Zadanie zadanie)
         {
+            if (ModelState.IsValid)
+            {
+;
+
+                // SprawdŸ, czy IDStatus jest poprawnie przypisany
+                if (string.IsNullOrEmpty(zadanie.StatusIDStatus))
+                {
+                    ModelState.AddModelError("StatusIDStatus", "Status jest wymagany."); // Dodaj b³¹d do modelu
+                }
+
+                if (ModelState.IsValid)
+                {
+                    context.Zadania.Add(zadanie);
+                    context.SaveChanges(); // Tutaj mo¿e wyst¹piæ b³¹d
+                    return RedirectToAction("Index");
+                }
+            }
+            /*
             if (ModelState.IsValid)
             {
                 context.Zadania.Add(zadanie);
@@ -79,6 +97,34 @@ namespace ToDoListApp.Controllers
                 ViewBag.Statusy = context.Statusy.ToList();
                 return View(zadanie);
             }
+            */
+            if (string.IsNullOrEmpty(zadanie.KategoriaIDKategoria))
+            {
+                ModelState.AddModelError("IDKategoria", "Kategoria jest wymagana.");
+                ViewBag.Kategorie = context.Kategorie.ToList();
+                ViewBag.Statusy = context.Statusy.ToList();
+                return View(zadanie);
+            }
+            else
+            {
+
+                try
+                {
+                    context.Zadania.Add(zadanie);
+                    context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (DbUpdateException ex)
+                {
+                    // Logowanie b³êdu
+                    var innerException = ex.InnerException?.Message;
+                    ModelState.AddModelError("", $"Wyst¹pi³ b³¹d: {innerException}");
+                    ViewBag.Kategorie = context.Kategorie.ToList();
+                    ViewBag.Statusy = context.Statusy.ToList();
+                    return View(zadanie);
+                }
+            }
+            
         }
         [HttpPost]
         public IActionResult Filter(string category, string due, string status)//string[] filtry )
@@ -94,7 +140,7 @@ namespace ToDoListApp.Controllers
 
             if (wybrane != null)
             {
-                wybrane.IDStatus = "zamkniete";
+                wybrane.StatusIDStatus = "zamkniete";
                 context.SaveChanges();
             }
             return RedirectToAction("index", new { ID = id });
@@ -103,7 +149,7 @@ namespace ToDoListApp.Controllers
         [HttpPost]
         public IActionResult UsunZrobione(string id)
         {
-            var usun = context.Zadania.Where(n => n.IDStatus == "zamkniete").ToList();
+            var usun = context.Zadania.Where(n => n.StatusIDStatus == "zamkniete").ToList();
 
             foreach (var zadanie in usun)
             {

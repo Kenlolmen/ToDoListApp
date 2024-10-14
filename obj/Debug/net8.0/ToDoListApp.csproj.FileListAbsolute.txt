@@ -140,3 +140,4 @@ C:\Users\Lenovo\source\repos\ToDoListApp\ToDoListApp\obj\Debug\net8.0\refint\ToD
 C:\Users\Lenovo\source\repos\ToDoListApp\ToDoListApp\obj\Debug\net8.0\ToDoListApp.pdb
 C:\Users\Lenovo\source\repos\ToDoListApp\ToDoListApp\obj\Debug\net8.0\ToDoListApp.genruntimeconfig.cache
 C:\Users\Lenovo\source\repos\ToDoListApp\ToDoListApp\obj\Debug\net8.0\ref\ToDoListApp.dll
+C:\Users\Lenovo\source\repos\ToDoListApp\ToDoListApp\obj\Debug\net8.0\ToDoListApp.sourcelink.json

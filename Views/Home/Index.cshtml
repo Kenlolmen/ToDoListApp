@@ -2,23 +2,23 @@
 <div class="row">
     <div class= "col-md-2">
         <form asp-action="Filter" method ="post">
-            <div class="mb-3">
-                <label class ="from-label">Kategoria:</label>
-                <select name ="category" class="from-select"
+            <div class="mb-5">
+                <label class="from-label font-weight-bold">Kategoria:</label>
+                <select name="Kategoria" class="from-select" style="border-radius: 8px;"
                         asp-items="@(new SelectList(ViewBag.Kategorie, "IDKategoria", "Nazwa", ViewBag.Filtry.IDKategoria))">
                 <option value="all">All</option>
                 </select>
             </div>
-            <div class="mb-3">
-                <label class="from-label">Okres:</label>
-                <select name="due" class="from-select"
+            <div class="mb-5">
+                <label class="from-label font-weight-bold">Okres:</label>
+                <select name="due" class="from-select" style="border-radius: 8px;"
                         asp-items="@(new SelectList(ViewBag.DueFilters, "Key", "Value", ViewBag.Filtry.Due))">
                     <option value="all">All</option>
                 </select>
             </div>
-            <div class="mb-3">
-                <label class="from-label">Status:</label>
-                <select name="status" class="from-select"
+            <div class="mb-5">
+                <label class="from-label font-weight-bold">Status:</label>
+                <select name="status" class="from-select" style="border-radius: 8px;"
                         asp-items="@(new SelectList(ViewBag.Statusy, "IDStatus", "Nazwa", ViewBag.Filtry.IDStatus))">
                     <option value="all">All</option>
                 </select>
@@ -32,7 +32,7 @@
     </div>
     <div class="col-md-10">
         <form asp-action="Ozn_Zrobione" method="post" asp-route-id="@ViewBag.Filtry.Filterstring">
-            <table class="table table-bordered table-striped mt-2">
+            <table class="table table-bordered table-light table-striped mt-2" style=" padding: 10px; border-radius: 10px; margin-bottom: 20px;">
                 <thead>
                     <tr>
                         <th>Opis </th>
@@ -42,7 +42,12 @@
                         <th class="w-25 "></th>
                     </tr>
                 </thead>
-                @if (Model != null && Model.Any()){
+                @if (Model != null && Model.Any())
+                {
+                    <div class="task-count" style="background-color: #f9f9f9; padding: 10px; border-radius: 10px; margin-bottom: 20px;">
+                        Liczba zadań: @Model.Count()
+                    </div>
+                
                 <tbody>
                     @foreach(Zadanie zadanie in Model)
                     {
@@ -50,9 +55,10 @@
                         <tr>
                             <td>@zadanie.Opis</td>
                             <td>@zadanie.Kategoria.Nazwa</td>
-                            <td class="@overdue">@zadanie.Date?.ToShortDateString()</td
+                            <td class="@overdue">@zadanie.Date?.ToShortDateString()</td>
+                            <td class="@overdue">@zadanie.Status.Nazwa</td>
                             <td>
-                                @if (zadanie.StatusIDStatus == "open")
+                                @if (zadanie.StatusIDStatus == "otw")
                                 {
                                     <button type="submit" class="btn btn-primary btn-sm"
                                             name="@nameof(Zadanie.Id)" value="@zadanie.Id">

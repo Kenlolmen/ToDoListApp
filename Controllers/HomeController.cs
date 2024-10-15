@@ -52,8 +52,10 @@ namespace ToDoListApp.Controllers
                     kolejka = kolejka.Where(n => n.Date == dzis);
                 }
             }
-            var zadania = kolejka.OrderBy(n => n.Date).ToList();
-            return View();
+
+            var zadania = context.Zadania.Include(z => z.Kategoria).Include(z => z.Status).ToList();
+
+            return View(zadania);
         }
 
         [HttpGet]
@@ -61,7 +63,7 @@ namespace ToDoListApp.Controllers
         {
             ViewBag.Kategorie = context.Kategorie.ToList();
             ViewBag.Statusy = context.Statusy.ToList();
-            var zadanie = new Zadanie { StatusIDStatus = "otwarte" };
+            var zadanie = new Zadanie { StatusIDStatus = "otw" };
             return View(zadanie);
         }
         [HttpPost]
@@ -84,20 +86,7 @@ namespace ToDoListApp.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            /*
-            if (ModelState.IsValid)
-            {
-                context.Zadania.Add(zadanie);
-                context.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                ViewBag.Kategorie = context.Kategorie.ToList();
-                ViewBag.Statusy = context.Statusy.ToList();
-                return View(zadanie);
-            }
-            */
+
             if (string.IsNullOrEmpty(zadanie.KategoriaIDKategoria))
             {
                 ModelState.AddModelError("IDKategoria", "Kategoria jest wymagana.");
@@ -140,7 +129,7 @@ namespace ToDoListApp.Controllers
 
             if (wybrane != null)
             {
-                wybrane.StatusIDStatus = "zamkniete";
+                wybrane.StatusIDStatus = "zam";
                 context.SaveChanges();
             }
             return RedirectToAction("index", new { ID = id });
@@ -149,7 +138,7 @@ namespace ToDoListApp.Controllers
         [HttpPost]
         public IActionResult UsunZrobione(string id)
         {
-            var usun = context.Zadania.Where(n => n.StatusIDStatus == "zamkniete").ToList();
+            var usun = context.Zadania.Where(n => n.StatusIDStatus == "zam").ToList();
 
             foreach (var zadanie in usun)
             {
@@ -157,7 +146,7 @@ namespace ToDoListApp.Controllers
             }
             context.SaveChanges();
 
-            return RedirectToAction("index", new { id = id });
+            return RedirectToAction("index", new { ID = id });
         }
 
     }

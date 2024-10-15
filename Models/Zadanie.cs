@@ -21,7 +21,7 @@ namespace ToDoListApp.Models
         [ValidateNever]
         public Kategoria Kategoria { get; set; } = null;
 
-        public bool CzyOpozniony => StatusIDStatus == "open" && Date < DateTime.Today;
+        public bool CzyOpozniony => StatusIDStatus == "otw" && Date < DateTime.Today;
 
     }
 }

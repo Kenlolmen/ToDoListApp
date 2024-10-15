@@ -18,5 +18,18 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fcb69f);
+    color: #333;
+    margin-top: 40px; 
+}
+
+.header-custom {
+    background-color: #3498db; 
+    color: #fff; 
+    padding: 0px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+.font-weight-bold {
+    font-weight: bold; /* Pogrubienie czcionki */
 }

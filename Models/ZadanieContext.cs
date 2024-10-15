@@ -21,8 +21,8 @@ namespace ToDoListApp.Models
             });
 
             modelBuilder.Entity<Status>().HasData(
-                  new Status { IDStatus = "zam", Nazwa = "Zamkniete" },
-                  new Status { IDStatus = "otw", Nazwa = "Otwarte" }
+                  new Status { IDStatus = "zam", Nazwa = "Zrobione" },
+                  new Status { IDStatus = "otw", Nazwa = "W trakcie" }
 
             );
 

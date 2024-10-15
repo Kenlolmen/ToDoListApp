@@ -75,12 +75,12 @@ namespace ToDoListApp.Migrations
                         new
                         {
                             IDStatus = "zam",
-                            Nazwa = "Zamkniete"
+                            Nazwa = "Zrobione"
                         },
                         new
                         {
                             IDStatus = "otw",
-                            Nazwa = "Otwarte"
+                            Nazwa = "W trakcie"
                         });
                 });
 

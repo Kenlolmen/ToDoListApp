@@ -4,21 +4,21 @@
         <form asp-action="Filter" method ="post">
             <div class="mb-5">
                 <label class="from-label font-weight-bold">Kategoria:</label>
-                <select name="Kategoria" class="from-select" style="border-radius: 8px;"
+                <select name="kategoria" class="form-select" style="border-radius: 8px;"
                         asp-items="@(new SelectList(ViewBag.Kategorie, "IDKategoria", "Nazwa", ViewBag.Filtry.IDKategoria))">
-                <option value="all">All</option>
-                </select>
+                    <option value="all">All</option>
+                 </select>       
             </div>
             <div class="mb-5">
                 <label class="from-label font-weight-bold">Okres:</label>
-                <select name="due" class="from-select" style="border-radius: 8px;"
+                <select name="due" class="form-select" style="border-radius: 8px;"
                         asp-items="@(new SelectList(ViewBag.DueFilters, "Key", "Value", ViewBag.Filtry.Due))">
                     <option value="all">All</option>
                 </select>
             </div>
             <div class="mb-5">
                 <label class="from-label font-weight-bold">Status:</label>
-                <select name="status" class="from-select" style="border-radius: 8px;"
+                <select name="status" class="form-select" style="border-radius: 8px;"
                         asp-items="@(new SelectList(ViewBag.Statusy, "IDStatus", "Nazwa", ViewBag.Filtry.IDStatus))">
                     <option value="all">All</option>
                 </select>

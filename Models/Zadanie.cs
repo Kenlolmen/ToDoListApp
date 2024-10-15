@@ -11,12 +11,12 @@ namespace ToDoListApp.Models
         [Required(ErrorMessage = "Wybierz Date")]
         public DateTime? Date { get; set; }
         [Required(ErrorMessage = "Wybierz Status")]
-       // public string IDStatus { get; set; } = string.Empty;
+
         public string StatusIDStatus { get; set; } = string.Empty;
         [ValidateNever]
         public Status Status { get; set; } = null;
         [Required(ErrorMessage = "Wybierz Kategorie")]   
-      //  public string IDKategoria { get; set; } = string.Empty;
+
         public string KategoriaIDKategoria { get; set; } = string.Empty;
         [ValidateNever]
         public Kategoria Kategoria { get; set; } = null;

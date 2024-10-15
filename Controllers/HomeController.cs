@@ -4,7 +4,7 @@ using Microsoft.Extensions.ObjectPool;
 using System.Diagnostics;
 using ToDoListApp.Models;
 
-
+ 
 namespace ToDoListApp.Controllers
 {
     public class HomeController : Controller
@@ -53,7 +53,7 @@ namespace ToDoListApp.Controllers
                 }
             }
 
-            var zadania = context.Zadania.Include(z => z.Kategoria).Include(z => z.Status).ToList();
+             var zadania = context.Zadania.Include(z => z.Kategoria).Include(z => z.Status).ToList();
 
             return View(zadania);
         }
@@ -71,22 +71,19 @@ namespace ToDoListApp.Controllers
         {
             if (ModelState.IsValid)
             {
-;
-
-                // SprawdŸ, czy IDStatus jest poprawnie przypisany
+            
                 if (string.IsNullOrEmpty(zadanie.StatusIDStatus))
                 {
-                    ModelState.AddModelError("StatusIDStatus", "Status jest wymagany."); // Dodaj b³¹d do modelu
+                    ModelState.AddModelError("StatusIDStatus", "Status jest wymagany."); 
                 }
 
                 if (ModelState.IsValid)
                 {
                     context.Zadania.Add(zadanie);
-                    context.SaveChanges(); // Tutaj mo¿e wyst¹piæ b³¹d
+                    context.SaveChanges(); 
                     return RedirectToAction("Index");
                 }
             }
-
             if (string.IsNullOrEmpty(zadanie.KategoriaIDKategoria))
             {
                 ModelState.AddModelError("IDKategoria", "Kategoria jest wymagana.");
@@ -105,7 +102,7 @@ namespace ToDoListApp.Controllers
                 }
                 catch (DbUpdateException ex)
                 {
-                    // Logowanie b³êdu
+                    
                     var innerException = ex.InnerException?.Message;
                     ModelState.AddModelError("", $"Wyst¹pi³ b³¹d: {innerException}");
                     ViewBag.Kategorie = context.Kategorie.ToList();
@@ -118,7 +115,11 @@ namespace ToDoListApp.Controllers
         [HttpPost]
         public IActionResult Filter(string category, string due, string status)//string[] filtry )
         {
-            //  string id = string.Join("-", filtry);
+            
+            category = string.IsNullOrEmpty(category) ? "all" : category;
+            due = string.IsNullOrEmpty(due) ? "all" : due;
+            status = string.IsNullOrEmpty(status) ? "all" : status;
+
             string filterString = $"{category}-{due}-{status}";
             return RedirectToAction("index", new { ID = filterString });
         }

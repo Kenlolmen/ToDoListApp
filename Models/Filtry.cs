@@ -4,11 +4,13 @@
     {
         public Filtry(string filterstring)
         {
-            Filterstring = filterstring ?? "all-all-all";
-            string[] filtry = Filterstring.Split('-');
-               IDKategoria = filtry[0];
-               Due = filtry[1];
-               IDStatus = filtry[2];
+             Filterstring = filterstring ?? "all-all-all";
+             string[] filtry = Filterstring.Split('-');
+
+            IDKategoria = filtry.Length > 0 ? filtry[0] : "all";
+            Due = filtry.Length > 1 ? filtry[1] : "all";
+            IDStatus = filtry.Length > 2 ? filtry[2] : "all";
+
         }
         public string IDStatus { get; set; }
         public string Due { get; set; }

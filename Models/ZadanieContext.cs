@@ -3,6 +3,8 @@ using Microsoft.Identity.Client;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using ToDoListApp.Models;
+
+
 namespace ToDoListApp.Models
 {
     public class ZadanieContext : DbContext
@@ -17,7 +19,7 @@ namespace ToDoListApp.Models
         {
             modelBuilder.Entity<Status>(entity =>
             {
-                entity.HasKey(e => e.IDStatus); // Ustawienie klucza głównego
+                entity.HasKey(e => e.IDStatus); 
             });
 
             modelBuilder.Entity<Status>().HasData(
@@ -28,7 +30,7 @@ namespace ToDoListApp.Models
 
             modelBuilder.Entity<Kategoria>(entity =>
             {
-                entity.HasKey(e => e.IDKategoria); // Ustawienie klucza głównego
+                entity.HasKey(e => e.IDKategoria); 
             });
 
 

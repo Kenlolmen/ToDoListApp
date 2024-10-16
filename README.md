@@ -17,4 +17,4 @@ Project is created with:
 * Architektura MVC (model-view-controller)
 
 ## Prezentacja
-![Algorithm schema](./video/ToDoListAppVideo-ezgif.com-video-to-gif-converter)
+![Preview](video\ToDoListAppVideo-ezgif.com-video-to-gif-converter.gif)
